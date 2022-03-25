@@ -1,19 +1,25 @@
 import express from "express";  
+import {v4 as uuidV4} from 'uuid';
 
 const router= express.Router();
 
 const users=[
     {
         name:'hamza',
-        age:23
+        age:23,
+        id:uuidV4()
     },
     {
         name:'elon',
-        age:50
+        age:50,
+        id:uuidV4()
+        
     },
     {
         name:'john',
-        age:24
+        age:24,
+        id:uuidV4()
+        
     },
 ]
 
@@ -34,7 +40,23 @@ router.post('/users',function(req,res){
 })
 
 router.get('/users/:id', function(req,res){
-    res.send('hi from hamzaaa')
+    const userId= req.params.id;
+
+    const user=users.find(function(user){
+        return user.id===userId
+    })
+
+    res.json(user)
+})
+
+router.delete('/users/:id',function(req,res){
+    const userId=req.params.id
+
+    users=users.filter(function(user){
+        return true
+    })
+
+    res.json(users)
 })
 
 export default router;
