@@ -22,9 +22,19 @@ router.get('/users', function(req,res){
 });
 
 router.post('/users',function(req,res){
-    const body=req.body
-    console.log(body);
+    const {name,age}=req.body
+    console.log(name,age);
 
+    users.push({
+        name:name,
+        age:age
+    });
+    res.json(users)
+
+})
+
+router.get('/users/:id', function(req,res){
+    res.send('hi from hamzaaa')
 })
 
 export default router;
